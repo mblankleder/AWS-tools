@@ -3,6 +3,10 @@ AWS-tools
 
 Scripts to do some AWS operations easier
 
+Install gems
+------------
+```bundle install```
+
 pingdom_sg.rb
 -------------
 Script to pupulate AWS security groups with the Pingdom monitor system IPs.
