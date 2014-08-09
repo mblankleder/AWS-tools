@@ -4,8 +4,10 @@ require 'rubygems'
 require 'fog'
 require 'trollop'
 
+def_rel = "precise"
+
 opts = Trollop::options do
-	opt :release, "Ubuntu release raring or precise", :type => :string, :default => "precise"
+	opt :release, "Ubuntu release raring or precise", :type => :string, :default => def_rel
 end
 
 msg = "[INFO] Ubuntu #{opts[:release]} release selected. #{$0} -h for more options."
@@ -18,9 +20,8 @@ case opts[:release]
 		puts msg
     @rel = opts[:release]
   else
-    puts "[ERROR] Wrong release name"
-    system("#{$0}")
-    exit 1
+    puts "[WARNING] Wrong release name #{opts[:release]}. Using default."
+		@rel = def_rel
 end
 
 def conn(region='us-east-1')
