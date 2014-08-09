@@ -7,6 +7,13 @@ Install gems
 ------------
 ```bundle install```
 
+Requirements
+-------------
+Amazon keys: 
+
+```export AWS_SECRET_ACCESS_KEY="AAAAAWWWWWSSSSS...."```
+```export AWS_ACCESS_KEY_ID="AAAAAWWWWWSSSSS...."```
+
 pingdom_sg.rb
 -------------
 Script to pupulate AWS security groups with the Pingdom monitor system IPs.
