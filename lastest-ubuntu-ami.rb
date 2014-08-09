@@ -2,21 +2,23 @@
 
 require 'rubygems'
 require 'fog'
+require 'trollop'
 
-unless ARGV.length == 1
-  puts "Usage: #{$0} <ubuntu_relese [raring|precise]>\n"
-  exit 1
+opts = Trollop::options do
+	opt :release, "Ubuntu release raring or precise", :type => :string, :default => "precise"
 end
 
-case ARGV[0].strip
+msg = "[INFO] Ubuntu #{opts[:release]} release selected. #{$0} -h for more options."
+
+case opts[:release]
   when "raring"
-    puts "[INFO] Ubuntu #{ARGV[0].strip} release selected"
-    @rel = ARGV[0].strip
+		puts msg
+    @rel = opts[:release]
   when "precise"
-    puts "[INFO] Ubuntu #{ARGV[0].strip} release selected"
-    @rel = ARGV[0].strip
+		puts msg
+    @rel = opts[:release]
   else
-    puts "[ERROR] Wrong release"
+    puts "[ERROR] Wrong release name"
     system("#{$0}")
     exit 1
 end
