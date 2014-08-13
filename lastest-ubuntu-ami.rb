@@ -7,13 +7,13 @@ require 'trollop'
 def_rel = "precise"
 
 opts = Trollop::options do
-	opt :release, "Ubuntu release raring or precise", :type => :string, :default => def_rel
+	opt :release, "Ubuntu release saucy or precise", :type => :string, :default => def_rel
 end
 
 msg = "[INFO] Ubuntu #{opts[:release]} release selected. #{$0} -h for more options."
 
 case opts[:release]
-  when "raring"
+  when "saucy"
 		puts msg
     @rel = opts[:release]
   when "precise"
