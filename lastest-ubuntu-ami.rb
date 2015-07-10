@@ -4,7 +4,7 @@ require 'rubygems'
 require 'fog'
 require 'trollop'
 
-def_rel = "precise"
+def_rel = "trusty"
 
 opts = Trollop::options do
 	opt :release, "Ubuntu release trusty or precise", :type => :string, :default => def_rel
