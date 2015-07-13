@@ -5,12 +5,14 @@ require 'fog'
 require 'trollop'
 
 def_rel = "trusty"
+def_dev_type = "ebs"
 
 opts = Trollop::options do
 	opt :release, "Ubuntu release trusty or precise", :type => :string, :default => def_rel
+	opt :root_dev_type, "Root device type hvm or ebs", :type => :string, :default => def_dev_type
 end
 
-msg = "[INFO] Ubuntu #{opts[:release]} release selected. #{$0} -h for more options."
+msg = "[INFO] Ubuntu #{opts[:release].upcase} release with #{opts[:root_dev_type].upcase} root device selected.\n Use #{$PROGRAM} -h for more options."
 
 case opts[:release]
   when "trusty"
@@ -43,7 +45,7 @@ def getAllRegions()
 end
 
 def latestUbuntuAmi(release, region)
- return conn(region).images.all('name' => "ubuntu/images-testing/ebs/ubuntu-#{release}-daily-amd64-server-*").last.id
+ return conn(region).images.all('name' => "ubuntu/images-testing/hvm/ubuntu-#{release}-daily-amd64-server-*").last.id
 end
 
 getAllRegions().each do |r|
