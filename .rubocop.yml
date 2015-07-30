@@ -1,0 +1,8 @@
+LineLength:
+  Max: 160
+Style/FileName:
+  Enabled: false
+Style/Tab:
+  Enabled: false
+Style/IndentationWidth:
+  Enabled: false
