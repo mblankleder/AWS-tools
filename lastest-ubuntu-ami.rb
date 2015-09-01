@@ -14,6 +14,8 @@ end
 
 msg = "[INFO] Ubuntu #{opts[:release].upcase} release with #{opts[:root_dev_type].upcase} root device selected.\n Use #{__FILE__} -h for more options."
 
+@rdt = opts[:root_dev_type]
+
 case opts[:release]
 when 'trusty'
 	puts msg
@@ -44,7 +46,7 @@ def all_regions
 end
 
 def latest_ubuntu_ami(release, region)
-	filter_str = "ubuntu/images-testing/hvm/ubuntu-#{release}-daily-amd64-server-*"
+	filter_str = "ubuntu/images-testing/#{@rdt}/ubuntu-#{release}-daily-amd64-server-*"
 	conn(region).images.all('name' => filter_str).last.id
 end
 
