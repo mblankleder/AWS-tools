@@ -5,10 +5,10 @@ require 'fog'
 require 'trollop'
 
 def_rel = 'trusty'
-def_dev_type = 'ebs'
+def_dev_type = 'hvm'
 
 opts = Trollop.options do
-	opt :release, 'Ubuntu release trusty or precise', type: :string, default: def_rel
+	opt :release, 'Ubuntu release trusty or vivid', type: :string, default: def_rel
 	opt :root_dev_type, 'Root device type hvm or ebs', type: :string, default: def_dev_type
 end
 
@@ -17,10 +17,12 @@ msg = "[INFO] Ubuntu #{opts[:release].upcase} release with #{opts[:root_dev_type
 @rdt = opts[:root_dev_type]
 
 case opts[:release]
-when 'trusty'
+when 'vivid'
+  puts "Not supported"
+  exit 0
 	puts msg
 	@rel = opts[:release]
-when 'precise'
+when 'trusty'
 	puts msg
 	@rel = opts[:release]
 else
@@ -46,8 +48,10 @@ def all_regions
 end
 
 def latest_ubuntu_ami(release, region)
-	filter_str = "ubuntu/images-testing/#{@rdt}/ubuntu-#{release}-daily-amd64-server-*"
-	conn(region).images.all('name' => filter_str).last.id
+  time = Time.new
+  t = time.strftime("%Y%m")
+	filter_str = "ubuntu/images/#{@rdt}/ubuntu-#{release}-*-amd64-server-#{t}*"
+  conn(region).images.all('name' => filter_str).first.id
 end
 
 all_regions.each do |r|
